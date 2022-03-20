@@ -1,7 +1,7 @@
 require 'json'
 
 players = JSON.load_file('scoreboard.json')
-last_winner = ""
+# last_winner = ""
 
 def leaderboard_display(arr, menu)
     sorted = arr.clone.sort_by { |player| player[4] }
@@ -54,7 +54,7 @@ while quit == false
     when 1
         leaderboard_menu = true
         while leaderboard_menu == true
-            puts "Please congragulate our most recent winner, #{last_winner}"
+            # puts "Please congragulate our most recent winner, #{last_winner}"
             puts "What would you like to do?"
             puts "1. Placement summary"
             puts "2. Placement details"
