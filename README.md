@@ -1,6 +1,6 @@
 **Kahoot Kompanion**
 
-This is a simple small terminal application which will allow tracking of the Kahoot winners each day and display a leaderboard. The points sytem gives points 1st, 2nd and 3rd slots of each days quiz. Winners get 2 points, runner up and third get 1 point each.
+This is a simple small terminal application which will allow tracking of the Kahoot winners each day and display a leaderboard. The points sytem gives points to 1st, 2nd and 3rd winners of each days quiz. 1st place get 2 points, while runner up and third get 1 point each.
 
 The scoreboard.json will be updated and pushed to Github daily with the winners for the day. Providing you have pulled down the most recent scoreboard.json in the directory with the application, the display leaderboard option will display the updated scores.
 
