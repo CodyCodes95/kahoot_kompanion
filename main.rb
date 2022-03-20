@@ -78,7 +78,8 @@ while quit == false
     when 2
         admin_menu = true
         while admin_menu == true
-        puts "Please enter the password to modify the leaderboard, or type back to navigate back."
+        puts "Please enter the password to modify the leaderboard"
+        puts "Or type back to navigate back."
         pw = gets.chomp
         if pw == "plaintextpasswordlol"
             puts "Please enter the name of todays champion"

@@ -4,6 +4,10 @@ This is a simple small terminal application which will allow tracking of the Kah
 
 The scoreboard.json will be updated and pushed to Github daily with the winners for the day. Providing you have pulled down the most recent scoreboard.json in the directory with the application, the display leaderboard option will display the updated scores.
 
+**TO VIEW SCOREBOARD**
+
+Enter 1 to select the leaderboard menu from the main menu.
+
 If you want to play with the application yourself, you can add the winners in via the *admin* menu using the password *plaintextpasswordlol* and add the winners each day. Note this will only update your local scoreboard.json file, for the most up to date copy pull the scoreboard.json from this Github repo daily.
 
 *Scores are recorded as of 21/03/22*
