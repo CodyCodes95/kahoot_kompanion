@@ -38,7 +38,7 @@ def score_adder(first, second, third, arr)
     end
 
     arr.each_with_index do |_player, i|
-            arr[i][4] = ((arr[i][1]) * 2) + arr[i][2] + arr[i][3]
+            arr[i][4] = ((arr[i][1]) * 3) + (arr[i][2] *2) + arr[i][3]
     end
 end
 
