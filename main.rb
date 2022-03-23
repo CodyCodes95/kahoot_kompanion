@@ -25,10 +25,10 @@ def quiz_maker
         puts "Enter the correct answer to your question"
         correct_answer = gets.strip
         puts "Enter each fake answer hitting enter between each"
-        answer2= gets.strip
-        answer3= gets.strip
-        answer4= gets.strip
-        quiz.push({question:question, correct:correct_answer, answer2:answer2, answer3:answer3, answer4:answer4})
+        answer2 = gets.strip
+        answer3 = gets.strip
+        answer4 = gets.strip
+        quiz.push({ question: question, correct: correct_answer, answer2: answer2, answer3: answer3, answer4: answer4 })
         i += 1
     end
     File.write("#{name}.json", JSON.pretty_generate(quiz))
@@ -37,19 +37,18 @@ end
 def quiz_loader(quiz)
     score = 0
     current_question = 0
-    correct =
-    current_quiz = JSON.load_file("#{quiz}.json", symbolize_names:true)
-    current_quiz.each_with_index do |question, i|
-        system"clear"
-        questions_random = [question[:correct],question[:answer2], question[:answer3], question[:answer4]].shuffle!
+    current_quiz = JSON.load_file("#{quiz}.json", symbolize_names: true)
+    current_quiz.each_with_index do |question, _i|
+        system "clear"
+        questions_random = [question[:correct], question[:answer2], question[:answer3], question[:answer4]].shuffle!
         questions_random.each_with_index do |question, i|
             puts "#{i + 1}. #{question}"
         end
-        current_question +=1
+        current_question += 1
         puts "Enter your answer"
-        answer = gets.chomp
-        if answer == question[:correct]
-            score +=1
+        answer = gets.chomp.to_i
+        if question[:correct] == questions_random[answer - 1]
+            score += 1
             puts "CORRECT!"
         else
             puts "Wrong. The correct answer was #{question[:correct]}"
@@ -101,7 +100,7 @@ def score_adder(first, second, third, arr)
     end
 
     arr.each_with_index do |_player, i|
-            arr[i][4] = ((arr[i][1]) * 3) + (arr[i][2] *2) + arr[i][3]
+            arr[i][4] = ((arr[i][1]) * 3) + (arr[i][2] * 2) + arr[i][3]
     end
 end
 
@@ -110,29 +109,31 @@ case ARGV[0]
 when "-admin"
     ARGV.clear
     admin_menu = true
-        while admin_menu == true
-        puts "Please enter the password to modify the leaderboard"
-        puts "Or type back to navigate back."
-        pw = gets.chomp
-        if pw == "plaintextpasswordlol"
-            puts "Please enter the name of todays champion"
-            champ = gets.chomp.capitalize
-            puts "Please enter todays runner up"
-            runner_up = gets.chomp.capitalize
-            puts "Enter today's third place player"
-            third = gets.chomp.capitalize
-            score_adder(champ, runner_up, third, players)
-            File.write('scoreboard.json', JSON.pretty_generate(players))
-        elsif pw == "back"
-            admin_menu = false
-        else
-            puts "Incorrect password please try again"
-        end
-        end
-        quit = true
+    while admin_menu == true
+    puts "Please enter the password to modify the leaderboard"
+    puts "Or type back to navigate back."
+    pw = gets.chomp
+    if pw == "plaintextpasswordlol"
+        puts "Please enter the name of todays champion"
+        champ = gets.chomp.capitalize
+        puts "Please enter todays runner up"
+        runner_up = gets.chomp.capitalize
+        puts "Enter today's third place player"
+        third = gets.chomp.capitalize
+        score_adder(champ, runner_up, third, players)
+        File.write('scoreboard.json', JSON.pretty_generate(players))
+    elsif pw == "back"
+        admin_menu = false
+    else
+        puts "Incorrect password please try again"
+    end
+    end
+    quit = true
 when "-help"
     ARGV.clear
     puts "Go find some help"
+    puts "Press enter to quit"
+    gets
     quit = true
 end
 
@@ -171,7 +172,7 @@ while quit == false
     when 2
         quiz_menu = true
         while quiz_menu == true
-            system"clear"
+            system "clear"
             puts "Would you like to"
             puts "1. Play an existing quiz"
             puts "2. Create a new quiz"
