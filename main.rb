@@ -31,15 +31,34 @@ def quiz_maker
         quiz.push({ question: question, correct: correct_answer, answer2: answer2, answer3: answer3, answer4: answer4 })
         i += 1
     end
-    File.write("#{name}.json", JSON.pretty_generate(quiz))
+    File.write("#{name}_quiz.json", JSON.pretty_generate(quiz))
+end
+
+def clear
+    return system "clear"
+end
+
+def quiz_getter
+    basedir = '.'
+    files = Dir.glob("*.json")
+    i = 1
+    all_quiz = []
+    files.each do |file|
+        if file.include?("quiz")
+            all_quiz.push(file)
+            i += 1
+        end
+    end
+    return all_quiz
 end
 
 def quiz_loader(quiz)
     score = 0
     current_question = 0
-    current_quiz = JSON.load_file("#{quiz}.json", symbolize_names: true)
-    current_quiz.each_with_index do |question, _i|
+    current_quiz = JSON.load_file(quiz.to_s, symbolize_names: true)
+    current_quiz.each do |question|
         system "clear"
+        puts question[:question]
         questions_random = [question[:correct], question[:answer2], question[:answer3], question[:answer4]].shuffle!
         questions_random.each_with_index do |question, i|
             puts "#{i + 1}. #{question}"
@@ -178,8 +197,11 @@ while quit == false
             puts "2. Create a new quiz"
             input = gets.chomp.to_i
             if input == 1
-                puts "Enter the name of the quiz you would like to play"
-                quiz_name = gets.chomp
+                clear
+                puts "Enter the quiz you would like to play"
+                quiz_getter.each_with_index { |quiz, i| puts "#{i + 1} #{quiz}" }
+                answer = gets.chomp.to_i
+                quiz_name = quiz_getter[answer - 1]
                 quiz_loader(quiz_name)
             elsif input == 2
                 quiz_maker
